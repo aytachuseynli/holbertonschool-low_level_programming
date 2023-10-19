@@ -1,0 +1,8 @@
+school: main.c student.c teacher.c
+    gcc -o school main.c student.c teacher.c
+
+all: school
+
+clean:
+    rm -f school
+
