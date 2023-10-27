@@ -1,34 +1,49 @@
-/*
- * File: 100-atoi.c
- * Auth: Brennan D Baraban
- */
-
-#include "holberton.h"
-
+#include "main.h"
 /**
- * _atoi - Converts a string to an integer.
- * @s: The string to be converted.
+ * _atoi -  convert a string to an integer.
+ * @s: string
  *
- * Return: The integer value of the converted string.
+ * Return: if no number in the string 0 otherwise the number.
  */
 int _atoi(char *s)
 {
-	int sign = 1;
 	unsigned int num = 0;
+	int len = 0, digit, found = 0;
+	char sign, c1, c2;
 
-	do {
-		if (*s == '-')
-			sign *= -1;
-
-		else if (*s >= '0' && *s <= '9')
-			num = (num * 10) + (*s - '0');
-
-		else if (num > 0)
-			break;
-
-	} while (*s++);
-
-	return (num * sign);
+	while (*(s + len) != '\0')
+	{
+		c1 = *(s + len);
+		c2 = *(s + len + 1);
+		if (c1 == ' ')
+		{
+			++len;
+			continue; }
+		if (c1 == '-')
+		{
+			if ((c2 >= '0' && c2 <= '9') || c2 == ' ' || c2 == '-' || c2 == '+')
+			{
+				if (sign == '-')
+					sign = ' ';
+				else
+					sign = '-';
+			}}
+		if (c1 >= '0' && c1 <= '9')
+		{
+			found = 1;
+			digit = 0;
+			while (digit <= 9)
+			{
+				if (*(s + len) == digit + '0')
+					num = (num * 10) + digit;
+				++digit;
+			}
+			if (!(c2 >= '0' &&  c2 <= '9'))
+				break;
+			}
+			++len;
+		}
+		if (found == 1 && sign == '-')
+			num = -1 * num;
+	return (num);
 }
-
-
