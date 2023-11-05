@@ -1,16 +1,19 @@
 #include "main.h"
 #include <stdio.h>
-
 /**
- * _strlen -  returns String length.
- * @s: pointer to char.
- * Return: length of String s.
+ * _strncpy - copy two strings with n as Max bytes from source.
+ * @src: source string pointer.
+ * @dest: destination string pointer.
+ * @n : amount of caracters to be concatenated.
+ * Return: a String copy.
  */
-int _strlen(char *s)
+char *_strncpy(char *dest, char *src, int n)
 {
-	int n = 0;
+	int i = 0;
 
-	while (s[n] != '\0')
-		n++;
-	return (n);
+	for ( ; i < n && src[i] != '\0'; i++)
+		dest[i] = src[i];
+	for ( ; i < n ; i++)
+		dest[i] = '\0';
+	return (dest);
 }
