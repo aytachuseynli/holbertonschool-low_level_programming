@@ -2,10 +2,10 @@
 #include <stdlib.h>
 
 /**
- * str_concat - concantenate two strings using malloc
+ * str_concat - concatenate two strings using malloc
  * @s1: string 1
  * @s2: string 2
- * Return: pointer to concar string
+ * Return: pointer to concat string
  */
 
 char *str_concat(char *s1, char *s2)
@@ -29,7 +29,7 @@ char *str_concat(char *s1, char *s2)
 
 	for (c = 0, d = 0; c < (i + j + 1); c++)
 	{
-		if (c < 1)
+		if (c < i)
 			a[c] = s1[c];
 		else
 			a[c] = s2[d++];
