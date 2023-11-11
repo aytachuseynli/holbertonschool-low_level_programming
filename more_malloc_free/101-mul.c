@@ -1,73 +1,143 @@
-#include "main.h"
-#include <stdio.h>
 #include <stdlib.h>
-#include <ctype.h>
+#include "main.h"
+
 /**
- * isAllDigits - Check if a string contains only digits.
- * @str: The string to check.
+ * _prntstr - prints a string
  *
- * Return: 1 if all characters are digits, 0 otherwise.
+ * @s: string to print
  */
-int isAllDigits(const char *str)
+void _prntstr(char *s)
 {
-    while (*str)
-    {
-        if (!isdigit(*str))
-            return 0; /* Not all characters are digits */
-        str++;
-    }
-    return 1; /* All characters are digits */
+	while (*s)
+		_putchar(*s++);
 }
 
 /**
- * multiplyNumbers - Multiply two positive numbers.
- * @num1: The first number.
- * @num2: The second number.
+ * numstrchk - checks arg array to see if the are numeric strings, converts
+ * from ascii to byte int, and returns their length. Segfault on null pointer.
  *
- * Return: The result of the multiplication.
+ * @s: string to check
+ *
+ * Return: Length of string. Exit 98 if not numeric.
  */
-int multiplyNumbers(int num1, int num2)
+long int numstrchk(char *s)
 {
-    return num1 * num2;
+	long int len = 0;
+
+	if (*s == 0)
+	{
+		_prntstr("Error\n");
+		exit(98);
+	}
+
+	while (*s)
+	{
+		if (*s < '0' || *s > '9')
+		{
+			_prntstr("Error\n");
+			exit(98);
+		}
+		*s -= '0';
+		len++;
+		s++;
+	}
+	return (len);
 }
 
 /**
- * main - Entry point of the program.
- * @argc: The number of command-line arguments.
- * @argv: An array containing the command-line arguments.
+ * _calloc_buffer - allocate a block of memory of size * num and init to '0'
  *
- * Return: 0 on success, 98 on error.
+ * @num: number of elements to allocate
+ * @size: size of element
+ *
+ * Return: pointer to allocated space, exit 98 on failure
  */
-int main(int argc, char *argv[])
+void *_calloc_buffer(long int num, long int size)
 {
-    /* Check the number of arguments */
-    if (argc != 3)
-    {
-        fprintf(stderr, "Error\n");
-        return 98;
-    }
+	void *ret;
+	char *ptr;
 
-    /* Check if num1 and num2 are composed of digits */
-    if (!isAllDigits(argv[1]) || !isAllDigits(argv[2]))
-    {
-        fprintf(stderr, "Error\n");
-        return 98;
-    }
+	ret = malloc(num * size);
+	if (ret == 0)
+	{
+		exit(98);
+	}
 
-    /* Convert command-line arguments to integers */
-    int num1 = atoi(argv[1]);
-    int num2 = atoi(argv[2]);
+	size = size * num;
+	ptr = ret;
+	ptr[--size] = 0;
+	while (size--)
+		ptr[size] = '0';
 
-    /* Check if the numbers are positive */
-    if (num1 <= 0 || num2 <= 0)
-    {
-        fprintf(stderr, "Error\n");
-        return 98;
-    }
+	return (ret);
+}
 
-    /* Perform multiplication and print the result */
-    int result = multiplyNumbers(num1, num2);
-    printf("%d\n", result);
+/**
+ * trimzero - moves pointer position to after last leading 0 in a string,
+ * or last zero if all zeros
+ *
+ * @s: char * we want to move
+ *
+ * Return: new position
+ */
+char *trimzero(char *s)
+{
+	while (*s == '0')
+		if (*(s + 1) != 0)
+			s++;
+		else
+			break;
+	return (s);
+}
 
-    return 0;
+/**
+ * main - multiply two  positive integer strings of arbitrary size
+ *
+ * @ac: number of arguments
+ * @av: arugments
+ *
+ * Return: 0 if successful, 98 if failure
+ */
+int main(int ac, char **av)
+{
+	long int len1, len2, lenres, i, j;
+	char *res;
+
+	if (ac != 3)
+	{
+		_prntstr("Error\n");
+		return (98);
+	}
+	av[2] = trimzero(av[2]);
+	av[1] = trimzero(av[1]);
+	if (*av[1] == '0' || *av[2] == '0')
+	{
+		_prntstr("0\n");
+		return (0);
+	}
+	len1 = numstrchk(av[1]);
+	len2 = numstrchk(av[2]);
+	lenres = len1 + len2;
+	res = _calloc_buffer(lenres + 1, sizeof(char));
+
+	for (i = lenres - 1, len1--; len1 >= 0; len1--, i += len2 - 1)
+		for (j = len2 - 1; j >= 0; j--, i--)
+		{
+			res[i] = (av[1][len1] * av[2][j] % 10) + res[i];
+			res[i - 1] = (av[1][len1] * av[2][j] / 10) + res[i - 1];
+			if (res[i] > '9')
+			{
+				res[i] -= 10;
+				res[i - 1]++;
+			}
+		}
+
+	if (*res == '0')
+		_prntstr(res + 1);
+	else
+		_prntstr(res);
+	_putchar('\n');
+	free(res);
+
+	return (0);
 }
