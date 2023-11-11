@@ -3,7 +3,7 @@
 #include <stdlib.h>
 
 /**
- * string_oconcat - function that concantenates two strings
+ * string_nconcat - function that concatenates two strings
  * @s1: string one being passed
  * @s2: string two being passed
  * @n: size
@@ -12,7 +12,7 @@
 char *string_nconcat(char *s1, char *s2, unsigned int n)
 {
 	char *p;
-	insigned int a, b, c, d;
+	unsigned int a, b, c, d;
 
 	if (s1 == 0)
 		s1 = "";
@@ -36,4 +36,3 @@ char *string_nconcat(char *s1, char *s2, unsigned int n)
 	p[c] = '\0';
 	return (p);
 }
-
