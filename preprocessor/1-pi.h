@@ -1,8 +1,3 @@
-#ifndef PIH
-#define PIH
-
+#ifndef PI
 #define PI 3.14159265359
-
-typedif int makecompilerhappy;
-
 #endif
