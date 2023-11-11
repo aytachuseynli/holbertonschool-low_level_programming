@@ -1,4 +1,8 @@
-#ifndef abs_h
-#define abs_h
-#define ABS(x) (x > 0 ? x : x * -1)
+#ifndef FUNCLIKEH
+#define FUNCLIKEH
+
+#define ABS(X) ((X) < 0 ? -(X) : (X))
+
+typedef int asdf;
+
 #endif
