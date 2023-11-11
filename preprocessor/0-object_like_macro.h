@@ -1,3 +1,8 @@
-#ifndef SIZE
-#DEFINE SIZE 1024
+#ifndef OBJECTLIKEH
+#define OBJECTLIKEH
+
+#define SIZE 1024
+
+typedef int asdf;
+
 #endif
