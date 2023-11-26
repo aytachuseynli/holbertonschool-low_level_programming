@@ -1,5 +1,6 @@
 #include "dog.h"
 #include <stdlib.h>
+#include <string.h>
 
 /**
  * new_dog - entry point
@@ -10,26 +11,31 @@
  */
 dog_t *new_dog(char *name, float age, char *owner)
 {
-	dog_t *p;
-	/* reserving memory to struct*/
-	p = malloc(sizeof(dog_t));
-	if (p == NULL)
-		return (NULL);
-	/* Cpunting name pointer*/
-	if (name == NULL)
-	{
-		free(p);
-		free(owner);
-		return (NULL);
-	}
-	if (owner == NULL)
-	{
-		free(p);
-		free(name);
-		return (NULL);
-	}
-	p->name = name;
-	p->age = age;
-	p->owner = owner;
-	return (p);
+    dog_t *p;
+
+    /* Reserve memory for the dog structure */
+    p = malloc(sizeof(dog_t));
+    if (p == NULL)
+        return (NULL);
+
+    /* Allocate memory for name and owner, and copy the content */
+    p->name = malloc(strlen(name) + 1);
+    p->owner = malloc(strlen(owner) + 1);
+
+    /* Check for allocation failures */
+    if (p->name == NULL || p->owner == NULL)
+    {
+        free(p->name);
+        free(p->owner);
+        free(p);
+        return (NULL);
+    }
+
+    /* Copy the content of name and owner */
+    strcpy(p->name, name);
+    p->age = age;
+    strcpy(p->owner, owner);
+
+    return (p);
 }
+
