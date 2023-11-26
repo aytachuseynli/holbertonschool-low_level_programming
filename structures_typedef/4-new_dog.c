@@ -3,11 +3,12 @@
 #include <string.h>
 
 /**
- * new_dog - entry point
+ * new_dog - creates a new dog structure
  * @name: string from main, name of pet
  * @age: number from main, age of pet
  * @owner: string from main, owner of pet
- * Return: p
+ *
+ * Return: p, pointer to the new dog structure
  */
 dog_t *new_dog(char *name, float age, char *owner)
 {
