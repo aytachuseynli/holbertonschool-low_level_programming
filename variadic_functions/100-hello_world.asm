@@ -11,4 +11,4 @@ main:	mov	rax, 1
 	syscall
 
 	section	.data
-message:db	"Hello, Holberton", 10
+message:db	"Hello, World", 10
