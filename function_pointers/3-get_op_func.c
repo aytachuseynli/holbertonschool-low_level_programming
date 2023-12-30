@@ -1,10 +1,11 @@
+#include <stdio.h>
+#include <string.h>
 #include "3-calc.h"
-#include <stdlib.h>
 /**
- * get_op_func - gets the correct function for an operator
- * @s: operator to get correct function for
+ * get_op_func - Getting operation function.
+ * @s: operator.
  *
- * Return: NULL if no match found, otherwise pointer to correct func
+ * Return: Result.
  */
 int (*get_op_func(char *s))(int, int)
 {
@@ -14,17 +15,18 @@ int (*get_op_func(char *s))(int, int)
 		{"*", op_mul},
 		{"/", op_div},
 		{"%", op_mod},
-		{NULL, NULL}
+		{NULL, NULL},
 	};
-	int i = 0;
+	unsigned long int i = 0;
 
-	while (ops[i].op != NULL)
+	while (i < sizeof(ops) / sizeof(ops[0]))
 	{
-		if (*(ops[i].op) == *s) /* found correct operator */
+		if (!strcmp(s, ops[i].op))
 		{
 			return (ops[i].f);
 		}
 		i++;
 	}
-	return (NULL); /* no match found */
+
+	return (NULL);
 }

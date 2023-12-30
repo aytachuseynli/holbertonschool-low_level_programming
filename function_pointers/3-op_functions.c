@@ -1,50 +1,54 @@
 #include <stdio.h>
-#include <stdlib.h>
 /**
- * op_add - entry point
- * @a: get number 1
- * @b: get number 2
- * Return: add between a and b
+ * op_add - add intigers.
+ * @a: number.
+ * @b: number.
+ *
+ * Return: Result of calc.
  */
 int op_add(int a, int b)
 {
 	return (a + b);
 }
 /**
- * op_sub - entry point
- * @a: get number 1
- * @b: get number 2
- * Return: return subtation between a and b
+ * op_sub - subtract intigers.
+ * @a: number.
+ * @b: number.
+ *
+ * Return: Result of calc.
  */
 int op_sub(int a, int b)
 {
 	return (a - b);
 }
 /**
- * op_mul - entry point
- * @a: get number 1
- * @b: get number 2
- * Return: return multiplication between a and b
+ * op_mul - multiply intigers.
+ * @a: number.
+ * @b: number.
+ *
+ * Return: Result of calc.
  */
 int op_mul(int a, int b)
 {
 	return (a * b);
 }
 /**
- * op_div - entry point
- * @a: get number 1
- * @b: get number 2
- * Return: return division between a and b
+ * op_div - divide intigers.
+ * @a: number.
+ * @b: number.
+ *
+ * Return: Result of calc.
  */
 int op_div(int a, int b)
 {
 	return (a / b);
 }
 /**
- * op_mod - entry point
- * @a: get number 1
- * @b: get number 2
- * Return: return module between a and b
+ * op_mod - module intigers.
+ * @a: number.
+ * @b: number.
+ *
+ * Return: Result of calc.
  */
 int op_mod(int a, int b)
 {
